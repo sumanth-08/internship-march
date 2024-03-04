@@ -24,7 +24,7 @@ const getConnection = async () => {
       .then(() => console.log("Database Connected Successfully"))
       .catch((err) => console.log("Database Falied to connect", err.message));
   }
-  // return connection;
+  return connection;
 };
 
 export default getConnection;
