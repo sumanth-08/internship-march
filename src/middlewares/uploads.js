@@ -3,7 +3,12 @@ import multer from "multer";
 const storage = multer.diskStorage({
   destination: "./public/products",
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    const uniqueName = new Date().getTime();
+    const ext = file.originalname.substring(
+      file.originalname.lastIndexOf("."),
+      file.originalname.length
+    );
+    cb(null, uniqueName + ext);
   },
 });
 

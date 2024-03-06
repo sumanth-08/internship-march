@@ -15,6 +15,11 @@ const productModel = {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  image: {
+    data: Buffer,
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   isactive: {
     type: DataTypes.INTEGER,
     defaultValue: 1,
@@ -32,7 +37,7 @@ const initProductData = async () => {
     await product.sync({ alter: true });
     return product;
   } catch (err) {
-    console.log("modelerror",err.message);
+    console.log("modelerror", err.message);
   }
 };
 

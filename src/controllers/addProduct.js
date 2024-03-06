@@ -29,6 +29,7 @@ router.post("/", uploads.single("image"), async (req, res) => {
     await product.create({
       product_name: product_name,
       price: price,
+      image: req.file.filename
     });
 
     return send(res, RESPONSE.SUCCESS);
