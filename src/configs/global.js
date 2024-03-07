@@ -11,6 +11,11 @@ const RESPONSE = {
     code: 201,
     message: "is required params",
   },
+
+  NO_DATA: {
+    code: 202,
+    message: "no data found",
+  },
 };
 
 export default RESPONSE;
