@@ -1,48 +1,63 @@
 import { DataTypes } from "sequelize";
 import getConnection from "../helpers/databaseConnection.js";
 
-const productModel = {
-  product_id: {
+const userModel = {
+  user_id: {
     primaryKey: true,
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },
-  product_name: {
+  username: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  price: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  image: {
-    data: Buffer,
+  password: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
+
   isactive: {
     type: DataTypes.INTEGER,
     defaultValue: 1,
   },
 };
 
-let product = null;
-const initProductData = async () => {
+let user = null;
+const inituserData = async () => {
   try {
-    if (product) return product;
+    if (user) return user;
     const sequelize = await getConnection();
-    product = sequelize.define("products", productModel, {
+    user = sequelize.define("users", userModel, {
       freezeTableName: true,
     });
 
-    await product.sync({ alter: true });
-    return product;
+    await user.sync({ alter: true });
+    return user;
   } catch (err) {
-    console.log("modelerror", err.message);
+    console.log("user-modelerror", err.message);
   }
 };
 
-export default initProductData;
+export default inituserData;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // const user = await inituserData();
 

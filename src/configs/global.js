@@ -16,6 +16,15 @@ const RESPONSE = {
     code: 202,
     message: "no data found",
   },
+  INVALID_ID: {
+    code: 203,
+    message: "ID is invalid",
+  },
+  
+  EXISTING_DATA: {
+    code: 204,
+    message: "already exists",
+  },
 };
 
 export default RESPONSE;

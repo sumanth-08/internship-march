@@ -1,8 +1,8 @@
 import { Router } from "express";
-import initProductData from "../models/productModel.js";
-import constants from "../configs/constants.js";
-import { send } from "../helpers/responseHelper.js";
-import RESPONSE from "../configs/global.js";
+import initProductData from "../../models/productModel.js";
+import constants from "../../configs/constants.js";
+import { send } from "../../helpers/responseHelper.js";
+import RESPONSE from "../../configs/global.js";
 
 const router = Router();
 
@@ -27,10 +27,11 @@ router.get("/", async (req, res) => {
         product_id: item.product_id,
         product_name: item.product_name,
         price: item.price,
-        image: "/products/" + item.image,
+        image: item.image != null ? "/products/" + item.image : null,
       };
     });
 
+    //{comment.image ? "http://localhost:9000"+ comment.image : Logo}
     // console.log(data.length);
     if (data.length == 0) {
       return send(res, RESPONSE.NO_DATA);

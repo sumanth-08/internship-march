@@ -1,8 +1,8 @@
 import { Router } from "express";
-import initProductData from "../models/productModel.js";
-import constants from "../configs/constants.js";
-import { send } from "../helpers/responseHelper.js";
-import RESPONSE from "../configs/global.js";
+import initProductData from "../../models/productModel.js";
+import constants from "../../configs/constants.js";
+import { send } from "../../helpers/responseHelper.js";
+import RESPONSE from "../../configs/global.js";
 const router = Router();
 import { Op } from "sequelize";
 

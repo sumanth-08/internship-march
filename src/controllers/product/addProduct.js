@@ -1,8 +1,8 @@
 import { Router } from "express";
-import initProductData from "../models/productModel.js";
-import RESPONSE from "../configs/global.js";
-import { send, setErrResMsg } from "../helpers/responseHelper.js";
-import uploads from "../middlewares/uploads.js";
+import initProductData from "../../models/productModel.js";
+import RESPONSE from "../../configs/global.js";
+import { send, setErrResMsg } from "../../helpers/responseHelper.js";
+import uploads from "../../middlewares/uploads.js";
 const router = Router();
 
 router.post("/", uploads.single("image"), async (req, res) => {
