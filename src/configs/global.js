@@ -20,10 +20,24 @@ const RESPONSE = {
     code: 203,
     message: "ID is invalid",
   },
-  
+
   EXISTING_DATA: {
     code: 204,
     message: "already exists",
+  },
+  CREDENTIAL_ERROR: {
+    code: 205,
+    message: "login credential does not match",
+  },
+
+  ACCESS_DENIED: {
+    code: 206,
+    message: "access-denied",
+  },
+  
+  INVALID_TOKEN: {
+    code: 207,
+    message: "invalid token",
   },
 };
 

@@ -7,6 +7,8 @@ import deleteProduct from "./src/controllers/product/deleteProduct.js";
 import editProduct from "./src/controllers/product/edirProduct.js";
 
 import register from "./src/controllers/authorization/register.js";
+import login from "./src/controllers/authorization/login.js";
+
 
 const routes = (app) => {
   app.use(express.json());
@@ -20,6 +22,8 @@ const routes = (app) => {
 
   //auth
   app.use("/api/auth/register", register);
+  app.use("/api/auth/login", login);
+
 };
 
 export default routes;

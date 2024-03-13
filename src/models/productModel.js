@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import getConnection from "../helpers/databaseConnection.js";
+import inituserData from "./userModel.js";
 
 const productModel = {
   product_id: {
@@ -34,6 +35,25 @@ const initProductData = async () => {
     product = sequelize.define("products", productModel, {
       freezeTableName: true,
     });
+    const user = await inituserData();
+
+    user.hasMany(product, {
+      as: "userInfo",
+      foreignKey: {
+        allowNull: false,
+        name: "user_id",
+      },
+      targetKey: "user_id",
+    });
+
+    // product.belongsTo(user, {
+    //   as: "userInfo",
+    //   foreignKey: {
+    //     allowNull: false,
+    //     name: "user_id",
+    //   },
+    //   targetKey: "user_id",
+    // });
 
     await product.sync({ alter: true });
     return product;
@@ -43,15 +63,3 @@ const initProductData = async () => {
 };
 
 export default initProductData;
-
-// const user = await inituserData();
-
-// product.belongsTo(user, {
-//   as: "userInfo",
-//   onDelete: "cascade",
-//   foreignKey: {
-//     allowNull: true,
-//     name: "user_id",
-//   },
-//   targetKey: "user_id",
-// });
