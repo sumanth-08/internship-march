@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken";
 router.post("/", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userModel = await inituserData();
+
     if (!email || email == "") {
       const updatedResponse = setErrResMsg(RESPONSE.REQUIRED_PARAMS, "email");
       return send(res, updatedResponse);
@@ -24,6 +24,8 @@ router.post("/", async (req, res) => {
       return send(res, updatedResponse);
     }
 
+    const userModel = await inituserData();
+
     const userData = await userModel.findOne({
       where: {
         isactive: constants.STATE.ACTIVE,
@@ -35,8 +37,8 @@ router.post("/", async (req, res) => {
       const token = jwt.sign(
         {
           id: userData.user_id,
+          email: userData.email,
           username: userData.username,
-          email: email,
         },
         process.env.SECURITYKEY
       );

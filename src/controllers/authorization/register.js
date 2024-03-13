@@ -54,7 +54,6 @@ router.post("/", async (req, res) => {
     });
 
     return send(res, RESPONSE.SUCCESS);
-
   } catch (err) {
     console.log(err);
     return send(res, RESPONSE.UNKNOWN_ERROR);

@@ -35,6 +35,7 @@ const initProductData = async () => {
     product = sequelize.define("products", productModel, {
       freezeTableName: true,
     });
+
     const user = await inituserData();
 
     user.hasMany(product, {
@@ -45,7 +46,7 @@ const initProductData = async () => {
       },
       targetKey: "user_id",
     });
-
+    
     // product.belongsTo(user, {
     //   as: "userInfo",
     //   foreignKey: {

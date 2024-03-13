@@ -3,7 +3,7 @@ import initProductData from "../../models/productModel.js";
 import constants from "../../configs/constants.js";
 import { send } from "../../helpers/responseHelper.js";
 import RESPONSE from "../../configs/global.js";
-import inituserData from "../../models/userModel.js";
+
 
 const router = Router();
 
@@ -14,58 +14,23 @@ router.get("/", async (req, res) => {
     let offset = (page - 1) * limit;
 
     const productModel = await initProductData();
-    const userModel = await inituserData();
-    // let data = await productModel.findAll({
-    //   where: { isactive: constants.STATE.ACTIVE },
-    //   order: [["createdAt", "DESC"]],
-    //   attributes: ["product_id", "product_name", "price", "image"],
-    //   offset: offset,
-    //   limit: limit,
-    // });
 
-    let data = await userModel.findOne({
-      include: [
-        {
-          model: productModel,
-          as: "userInfo",
-          where: { isactive: constants.STATE.ACTIVE },
-          attributes: ["product_id", "product_name", "price", "image"],
-        },
-      ],
-
+    let data = await productModel.findAll({
       where: { isactive: constants.STATE.ACTIVE },
       order: [["createdAt", "DESC"]],
-
+      attributes: ["product_id", "product_name", "price", "image"],
       offset: offset,
       limit: limit,
     });
 
-    // let data = await productModel.findAll({
-    //   include: [
-    //     {
-    //       model: userModel,
-    //       as: "userInfo",
-    //       where: { isactive: constants.STATE.ACTIVE },
-    //       // attributes: ["product_id", "product_name", "price", "image"],
-    //     },
-    //   ],
-
-    //   where: { isactive: constants.STATE.ACTIVE },
-    //   order: [["createdAt", "DESC"]],
-    //   attributes: ["product_id", "product_name", "price", "image"],
-
-    //   offset: offset,
-    //   limit: limit,
-    // });
-
-    // data = data.map((item) => {
-    //   return {
-    //     product_id: item.product_id,
-    //     product_name: item.product_name,
-    //     price: item.price,
-    //     image: item.image != null ? "/products/" + item.image : null,
-    //   };
-    // });
+    data = data.map((item) => {
+      return {
+        product_id: item.product_id,
+        product_name: item.product_name,
+        price: item.price,
+        image: item.image != null ? "/products/" + item.image : null,
+      };
+    });
 
     //{comment.image ? "http://localhost:9000"+ comment.image : Logo}
     // console.log(data.length);
@@ -81,3 +46,38 @@ router.get("/", async (req, res) => {
 });
 
 export default router;
+
+// let data = await userModel.findOne({
+//   include: [
+//     {
+//       model: productModel,
+//       as: "userInfo",
+//       where: { isactive: constants.STATE.ACTIVE },
+//       attributes: ["product_id", "product_name", "price", "image"],
+//     },
+//   ],
+
+//   where: { isactive: constants.STATE.ACTIVE },
+//   order: [["createdAt", "DESC"]],
+
+//   offset: offset,
+//   limit: limit,
+// });
+
+// let data = await productModel.findAll({
+//   include: [
+//     {
+//       model: userModel,
+//       as: "userInfo",
+//       where: { isactive: constants.STATE.ACTIVE },
+//       // attributes: ["product_id", "product_name", "price", "image"],
+//     },
+//   ],
+
+//   where: { isactive: constants.STATE.ACTIVE },
+//   order: [["createdAt", "DESC"]],
+//   attributes: ["product_id", "product_name", "price", "image"],
+
+//   offset: offset,
+//   limit: limit,
+// });

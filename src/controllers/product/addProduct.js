@@ -8,10 +8,10 @@ import authenticate from "../../middlewares/authentication.js";
 
 router.post("/", authenticate, uploads.single("image"), async (req, res) => {
   try {
+    const user_id = req.user.id;
+
     const { product_name, price } = req.body;
     const product = await initProductData();
-
-    const user_id = req.user.id;
 
     if (!product_name || product_name == "") {
       const updatedResponse = setErrResMsg(
